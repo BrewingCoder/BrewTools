@@ -1,0 +1,26 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "sds",
+    "gdg",
+    "cdc"
+  ],
+  "key" : {
+    "s" : {
+      "item" : "minecraft:fermented_spider_eye"
+    },
+    "d" : {
+      "item" : "minecraft:diamond"
+    },
+    "g" : {
+      "tag" : "forge:glass_panes/colorless"
+    },
+    "c" : {
+      "item" : "minecraft:golden_carrot"
+    }
+  },
+  "result" : {
+    "item" : "brewtools:goggles",
+    "count" : 1
+  }
+}

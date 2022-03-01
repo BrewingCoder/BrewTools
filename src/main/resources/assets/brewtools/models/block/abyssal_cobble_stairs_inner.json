@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "brewtools:block/abyssal_cobble",
+    "top": "brewtools:block/abyssal_cobble",
+    "side": "brewtools:block/abyssal_cobble"
+  }
+}

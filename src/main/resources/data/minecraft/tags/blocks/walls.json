@@ -1,0 +1,15 @@
+{
+  "replace" : false,
+  "values": [
+    "brewtools:abyssal_wall",
+    "brewtools:abyssal_brick_cracked_wall",
+    "brewtools:abyssal_brick_wall",
+    "brewtools:abyssal_cobble_wall",
+    "brewtools:abyssal_smooth_wall",
+    "brewtools:quarried_wall",
+    "brewtools:quarried_bricks_cracked_wall",
+    "brewtools:quarried_bricks_wall",
+    "brewtools:quarried_cobble_wall",
+    "brewtools:quarried_smooth_wall"
+  ]
+}

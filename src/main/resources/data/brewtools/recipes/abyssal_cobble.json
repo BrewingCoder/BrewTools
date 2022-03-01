@@ -1,0 +1,11 @@
+{
+  "type" : "crafting_shapeless",
+  "ingredients" : [
+    {
+      "item" : "brewtools:abyssal"
+    }
+  ],
+  "result" : {
+    "item" : "brewtools:abyssal_cobble"
+  }
+}

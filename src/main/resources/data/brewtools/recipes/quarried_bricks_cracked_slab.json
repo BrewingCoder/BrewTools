@@ -1,0 +1,15 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb"
+  ],
+  "key" : {
+    "b" : {
+      "item" : "brewtools:quarried_bricks_cracked"
+    }
+  },
+  "result" : {
+    "item" : "brewtools:quarried_bricks_cracked_slab",
+    "count" : 6
+  }
+}

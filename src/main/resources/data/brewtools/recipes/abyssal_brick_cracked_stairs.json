@@ -1,0 +1,17 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "b  ",
+    "bb ",
+    "bbb"
+  ],
+  "key" : {
+    "b" : {
+      "item" : "brewtools:abyssal_bricks_cracked"
+    }
+  },
+  "result" : {
+    "item" : "brewtools:abyssal_brick_cracked_stairs",
+    "count" : 4
+  }
+}

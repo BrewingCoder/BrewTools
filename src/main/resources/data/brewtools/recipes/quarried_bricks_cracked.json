@@ -1,0 +1,11 @@
+{
+  "type" : "crafting_shapeless",
+  "ingredients" : [
+    {
+      "item" : "brewtools:quarried_bricks"
+    }
+  ],
+  "result" : {
+    "item" : "brewtools:quarried_bricks_cracked"
+  }
+}

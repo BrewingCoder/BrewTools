@@ -1,0 +1,4 @@
+{
+    "parent" : "brewtools:block/abyssal_bricks",
+    "gui_light" : "front"
+}

@@ -1,0 +1,17 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "b  ",
+    "bb ",
+    "bbb"
+  ],
+  "key" : {
+    "b" : {
+      "item" : "brewtools:quarried_smooth"
+    }
+  },
+  "result" : {
+    "item" : "brewtools:quarried_smooth_stairs",
+    "count" : 4
+  }
+}

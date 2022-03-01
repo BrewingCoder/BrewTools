@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "brewtools:block/abyssal_brick_cracked_slab" },
+    "type=top": { "model": "brewtools:block/abyssal_brick_cracked_slab_top" },
+    "type=double": { "model": "brewtools:block/abyssal_bricks_cracked" }
+  }
+}

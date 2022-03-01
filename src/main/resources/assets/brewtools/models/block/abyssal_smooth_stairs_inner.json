@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "brewtools:block/abyssal_smooth",
+    "top": "brewtools:block/abyssal_smooth",
+    "side": "brewtools:block/abyssal_smooth"
+  }
+}

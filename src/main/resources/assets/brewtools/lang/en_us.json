@@ -1,0 +1,58 @@
+{
+  "itemGroup.brewtools" : "Brewers Tools",
+
+  "block.brewtools.mining_portal" : "Portal to Mining World",
+  "block.brewtools.abyssal" : "Abyssal Stone",
+
+  "block.brewtools.abyssal_bricks" : "Abyssal Stone Bricks",
+  "block.brewtools.abyssal_bricks_cracked" : "Cracked Abyssal Stone Bricks",
+  "block.brewtools.abyssal_cobble" : "Abyssal Cobblestone",
+  "block.brewtools.abyssal_smooth" : "Smooth Abyssal Stone",
+
+  "block.brewtools.abyssal_stairs" : "Abyssal Stone Stairs",
+  "block.brewtools.abyssal_brick_stairs" : "Abyssal Stone Brick Stairs",
+  "block.brewtools.abyssal_brick_cracked_stairs" : "Cracked Abyssal Stone Brick Stairs",
+  "block.brewtools.abyssal_cobble_stairs" : "Abyssal Cobblestone Stairs",
+  "block.brewtools.abyssal_smooth_stairs" : "Smooth Abyssal Stone Stairs",
+
+  "block.brewtools.abyssal_slab" : "Abyssal Stone Slab",
+  "block.brewtools.abyssal_brick_slab" : "Abyssal Stone Brick Slab",
+  "block.brewtools.abyssal_brick_cracked_slab" : "Cracked Abyssal Stone Brick Slab",
+  "block.brewtools.abyssal_cobble_slab" : "Abyssal Cobblestone Slab",
+  "block.brewtools.abyssal_smooth_slab" : "Smooth Abyssal Stone Slab",
+
+  "block.brewtools.abyssal_wall" : "Abyssal Wall",
+  "block.brewtools.abyssal_brick_wall": "Abyssal Brick Wall",
+  "block.brewtools.abyssal_brick_cracked_wall" : "Cracked Abyssal Brick Wall",
+  "block.brewtools.abyssal_cobble_wall" : "Abyssal Cobblestone Wall",
+  "block.brewtools.abyssal_smooth_wall" : "Smooth Abyssal Wall",
+
+  "block.brewtools.abyssal_pillar" : "Abyssal Pillar",
+  "block.brewtools.abyssal_brick_pillar" : "Abyssal Brick Pillar",
+  "block.brewtools.abyssal_brick_cracked_pillar" : "Cracked Abyssal Brick Pillar",
+  "block.brewtools.abyssal_cobble_pillar" : "Abyssal Cobblestone Pillar",
+  "block.brewtools.abyssal_smooth_pillar" : "Smooth Abyssal Pillar",
+
+  "block.brewtools.quarried" : "Quarried Stone",
+  "block.brewtools.quarried_wall" : "Quarried Stone Wall",
+  "block.brewtools.quarried_slab" : "Quarried Stone Slab",
+  "block.brewtools.quarried_stairs" : "Quarried Stone Stairs",
+
+  "block.brewtools.quarried_bricks" : "Quarried Stone Bricks",
+  "block.brewtools.quarried_bricks_stairs": "Quarried Stone Brick Stairs",
+  "block.brewtools.quarried_bricks_slab": "Quarried Stone Brick Slab",
+  "block.brewtools.quarried_bricks_wall": "Quarried Stone Brick Wall",
+
+  "block.brewtools.quarried_cobble" : "Quarried Cobblestone",
+  "block.brewtools.quarried_cobble_stairs" : "Quarried Cobblestone Stairs",
+  "block.brewtools.quarried_cobble_slab" : "Quarried Cobblestone Slab",
+  "block.brewtools.quarried_cobble_wall" : "Quarried Cobblestone Wall",
+
+  "block.brewtools.quarried_smooth" : "Quarried Smooth Stone",
+  "block.brewtools.quarried_smooth_stairs" : "Quarried Smooth Stone Stairs",
+  "block.brewtools.quarried_smooth_slab" : "Quarried Smooth Stone Slab",
+  "block.brewtools.quarried_smooth_wall" : "Quarried Smooth Stone Wall",
+
+  "item.brewtools.goggles" : "Night Vision Goggles"
+
+}

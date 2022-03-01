@@ -1,0 +1,6 @@
+{
+  "parent" : "block/cube_all",
+  "textures" : {
+      "all" : "brewtools:block/quarried_bricks_cracked"
+  }
+}

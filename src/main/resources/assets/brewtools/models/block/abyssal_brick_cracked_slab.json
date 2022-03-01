@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "brewtools:block/abyssal_bricks_cracked",
+    "top": "brewtools:block/abyssal_bricks_cracked",
+    "side": "brewtools:block/abyssal_bricks_cracked"
+  }
+}

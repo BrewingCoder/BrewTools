@@ -1,0 +1,15 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb"
+  ],
+  "key" : {
+    "b" : {
+      "item" : "brewtools:abyssal"
+    }
+  },
+  "result" : {
+    "item" : "brewtools:abyssal_slab",
+    "count" : 6
+  }
+}
