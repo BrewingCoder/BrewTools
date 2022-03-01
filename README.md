@@ -5,7 +5,7 @@ BrewTools, a collection of odds and ends that the Brew Team has enjoyed over the
 
 By default we use 256 pixel textures.  If there is enough interest outside of the Brew Team I'm totally open to creating 16 and/or 32 pixel textures and having those be options within the mod.
 
-###Items of note, and origins:
+### Items of note, and origins:
 
 * **Abyssal and Quarried Stone.**  I *loved* these blocks back in the Railcraft days and often used these black/off-white blocks as primary building materials for bases, roads, etc.  I've added both with a heavy ore spawn and many variations including slabs, stairs, walls, cobbled, cracked, etc.
 
@@ -27,6 +27,7 @@ TODOS:
  |Diamond|7 sq.| 1|
 |Emerald|11 sq| 1.5|
 |Netherrite|Full chunk|2|
+
 *Make mining dimension fully configurable when it comes to ore spawning.  give 100% control to modpack creator in a JSON file.
 
 
