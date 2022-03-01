@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Rev:.r)
+name: $(Rev:.r)
 
 steps:
 - script: echo $(Build.BuildNumber)
@@ -23,4 +23,19 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
-    tasks: 'build'
+    tasks: 'jar'
+
+#build\libs
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)/build/libs'
+    Contents: '*.jar'
+    TargetFolder: $(Build.ArtifactStagingDirectory)/publish_artifact
+    OverWrite: true
+    CleanTargetFolder: true
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: $(Build.ArtifactStagingDirectory)/publish_artifact
+    artifactName: BrewTools Mod
