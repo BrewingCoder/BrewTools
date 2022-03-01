@@ -9,6 +9,8 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Rev:.r)
+
 steps:
 - script: echo $(Build.BuildNumber)
 - task: Gradle@2
