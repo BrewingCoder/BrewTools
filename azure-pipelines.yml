@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- master
+- 1.16.5
 
 pool:
   vmImage: ubuntu-latest
@@ -38,4 +38,4 @@ steps:
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: $(Build.ArtifactStagingDirectory)/publish_artifact
-    artifactName: BrewTools Mod
+    artifactName: BrewTools
