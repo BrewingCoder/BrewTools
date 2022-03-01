@@ -13,11 +13,11 @@ apply plugin: 'maven-publish'
 
 String build_number = System.getenv().BUILD_BUILDNUMBER
 if(build_number == null) {
-    build_number = "9999"
+    build_number = ".9999"
 }
 String semver = "${version_major}.${version_minor}"
 
-version = "${semver}.${build_number}"
+version = "${semver}${build_number}"
 group = "${mod_group}"
 archivesBaseName = "${mod_name}"
 
