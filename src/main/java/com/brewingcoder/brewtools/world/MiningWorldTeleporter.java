@@ -49,12 +49,11 @@ public class MiningWorldTeleporter implements ITeleporter {
                 .entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() instanceof TileEntityMiningPortal);
-        BlockPos portalBlockPos = stream.sorted( (o1,o2) -> o2.getKey().getY() - o1.getKey().getY()).map(Map.Entry::getKey).findFirst().orElse(null);
 
-        if (portalBlockPos != null){
-            if(chunk.getBlockState(portalBlockPos.above()).is(Blocks.AIR)){
-                return portalBlockPos;
-            }
+        //First TE that's a portal block is the winner.
+        Map.Entry<BlockPos,TileEntity> resultsMap = stream.findFirst().orElse(null);
+        if(resultsMap != null){
+            return resultsMap.getKey();
         }
         return null;
     }
@@ -70,8 +69,8 @@ public class MiningWorldTeleporter implements ITeleporter {
                         if(chunk.getBlockState(pos).is(Blocks.AIR)) {
                             continue;
                         }
-                        if (chunk.getBlockState(pos.above(1)).is(Blocks.AIR) && chunk.getBlockState(pos.above(2)).is(Blocks.AIR)) {
-                            BlockPos absolutePos = chunk.getPos().getWorldPosition().offset(pos.getX(), pos.getY(), pos.getZ());
+                        if (chunk.getBlockState(pos.above(1)).is(Blocks.AIR) && chunk.getBlockState(pos.above(2)).is(Blocks.AIR) && chunk.getBlockState(pos.above(3)).is(Blocks.AIR)) {
+                            BlockPos absolutePos = chunk.getPos().getWorldPosition().offset(pos.getX(), pos.getY() +1, pos.getZ());
                             world.setBlockAndUpdate(absolutePos, ModBlocks.MINING_PORTAL.get().defaultBlockState());
                             return absolutePos;
                         }
