@@ -1,8 +1,8 @@
 package com.brewingcoder.brewtools.item;
 
-import net.minecraft.item.Item;
+
+import net.minecraft.world.item.Item;
 
 public interface IItemBlock {
-
     Item toItem();
 }

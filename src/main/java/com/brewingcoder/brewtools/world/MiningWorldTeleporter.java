@@ -2,13 +2,14 @@ package com.brewingcoder.brewtools.world;
 
 import com.brewingcoder.brewtools.blocks.ModBlocks;
 import com.brewingcoder.brewtools.tileentity.TileEntityMiningPortal;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.server.ServerWorld;
+//import net.minecraft.block.Blocks;
+//import net.minecraft.entity.Entity;
+//import net.minecraft.entity.player.ServerPlayerEntity;
+//import net.minecraft.tileentity.TileEntity;
+//import net.minecraft.util.math.BlockPos;
+//import net.minecraft.world.chunk.Chunk;
+//import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.common.util.ITeleporter;
 
 import java.util.Map;
