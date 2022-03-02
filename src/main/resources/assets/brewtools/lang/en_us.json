@@ -3,6 +3,7 @@
 
   "block.brewtools.mining_portal" : "Portal to Mining World",
   "block.brewtools.abyssal" : "Abyssal Stone",
+  "block.brewtools.redstone_clock" : "Redstone Clock",
 
   "block.brewtools.abyssal_bricks" : "Abyssal Stone Bricks",
   "block.brewtools.abyssal_bricks_cracked" : "Cracked Abyssal Stone Bricks",
