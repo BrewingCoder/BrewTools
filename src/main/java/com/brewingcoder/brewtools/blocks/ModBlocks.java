@@ -37,7 +37,7 @@ public class ModBlocks{
     }
 
     public static final RegistryObject<Block> MINING_PORTAL             = registerBlock("mining_portal",()-> new MiningPortalBlock(BlockProperties.rock(2f,8f)) );
-    public static final RegistryObject<Block> REDSTONE_CLOCK            = registerBlock("redstone_clock",()-> new RedstoneClock(BlockProperties.wood(0.4f)));
+    public static final RegistryObject<Block> REDSTONE_CLOCK            = registerBlock("redstone_clock",()-> new RedstoneClock(BlockProperties.rock(1f,4f).lightLevel((lvl)->15)));
 
     public static final RegistryObject<Block> ABYSSAL                   = registerBlock("abyssal",() -> new DecoBlockBase(BlockProperties.rock(1.0f,8.0f)));
     public static final RegistryObject<Block> ABYSSAL_BRICKS            = registerBlock("abyssal_bricks",() -> new DecoBlockBase(BlockProperties.rock(1.0f,8.0f)));

@@ -17,7 +17,7 @@ if(build_number == null) {
 }
 String semver = "${version_major}.${version_minor}"
 
-version = "${semver}${build_number}"
+version = "1.16.5-${semver}${build_number}"
 group = "${mod_group}"
 archivesBaseName = "${mod_name}"
 

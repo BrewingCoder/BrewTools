@@ -1,0 +1,23 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "aba",
+    "bcb",
+    "aba"
+  ],
+  "key" : {
+    "a" : {
+      "item" : "minecraft:stone"
+    },
+    "b" : {
+      "item" : "minecraft:redstone"
+    },
+    "c" : {
+      "item" : "minecraft:quartz"
+    }
+  },
+  "result" : {
+    "item" : "brewtools:redstone_clock",
+    "count" : 1
+  }
+}

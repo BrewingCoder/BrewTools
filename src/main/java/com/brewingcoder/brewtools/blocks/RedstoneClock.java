@@ -1,14 +1,13 @@
 package com.brewingcoder.brewtools.blocks;
 
-import com.brewingcoder.brewtools.BrewTools;
 import com.brewingcoder.brewtools.item.IItemBlock;
 import com.brewingcoder.brewtools.item.ItemGroups;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
@@ -18,65 +17,51 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.TickPriority;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Random;
 
-public class RedstoneClock extends HorizontalBlock implements  IItemBlock {
+
+@SuppressWarnings("deprecation")
+public class RedstoneClock extends Block implements  IItemBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-    //public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     boolean changing = false;
-    boolean canProvidePower = true;
-    public final static int POWER_TIME = 2;
-    public final static int TICK_TIME = 20;
-
-    public long LastActivation = 0;
-
-    enum PowerState {
-        ENABLED_NOT_POWERED,
-        ENABLED_POWERED,
-        DISABLED;
-        public BlockState state;
-    }
-
+    public final static int POWER_TIME = 20;
+    public final static int TICK_TIME = 60;
 
     public RedstoneClock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(POWERED,false));
+        this.registerDefaultState(this.defaultBlockState().setValue(POWERED,Boolean.FALSE).setValue(LIT,Boolean.FALSE));
     }
+
 
     @Override
     public void tick(BlockState state, ServerWorld world, BlockPos pos, Random rnd) {
         if (changing) return;
-
-        boolean flag = state.getValue(POWERED);
-        int l = (int)(world.getGameTime() % TICK_TIME);
+        int l = (int)(world.getGameTime()  % TICK_TIME);
         changing=true;
-        if (l < POWER_TIME && shouldCycle(world,pos,state)){
-            world.setBlock(pos,state.setValue(POWERED,Boolean.valueOf(true)),2);
-            world.getBlockTicks().scheduleTick(pos,this,TICK_TIME -1, TickPriority.HIGH);
+        if (world.hasNeighborSignal(pos) && !state.getValue(POWERED)){
+             world.setBlockAndUpdate(pos,state.setValue(POWERED, Boolean.FALSE).setValue(LIT,Boolean.FALSE));
+            world.getBlockTicks().scheduleTick(pos,this,POWER_TIME -1, TickPriority.HIGH);
+        }
+        else if (l < POWER_TIME ){
+            world.setBlockAndUpdate(pos, state.setValue(POWERED, Boolean.TRUE).setValue(LIT,Boolean.TRUE));
+            world.getBlockTicks().scheduleTick(pos,this,POWER_TIME -1, TickPriority.HIGH);
         }else{
-            world.setBlock(pos,state.setValue(POWERED,Boolean.valueOf(false)),2);
-            world.getBlockTicks().scheduleTick(pos,this,TICK_TIME -1, TickPriority.HIGH);
+            world.setBlockAndUpdate(pos,state.setValue(POWERED, Boolean.FALSE).setValue(LIT,Boolean.FALSE));
+            world.getBlockTicks().scheduleTick(pos,this,POWER_TIME -1, TickPriority.HIGH);
         }
         changing=false;
     }
 
     @Override
-    public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
-        if (world.isClientSide() || changing) return;
-
-        changing = true;
-        ServerWorld serverWorld = (ServerWorld) world;
-        if (serverWorld.hasNeighborSignal(pos) && canProvidePower){
-            canProvidePower=false;
-        }else if (!serverWorld.hasNeighborSignal(pos) && !canProvidePower){
-            canProvidePower = true;
-            serverWorld.getBlockTicks().scheduleTick(pos,this,TICK_TIME -1, TickPriority.HIGH);
-        }
-        changing = false;
+    public void neighborChanged(BlockState blockState, World world, BlockPos blockPos, Block block, BlockPos blockPos1, boolean p_220069_6_) {
+        world.getBlockTicks().scheduleTick(blockPos,this,-1,TickPriority.HIGH);
     }
 
     @Override
@@ -85,18 +70,27 @@ public class RedstoneClock extends HorizontalBlock implements  IItemBlock {
     }
 
     @Override
+    public int getDirectSignal(BlockState blockState, IBlockReader iBlockReader, BlockPos blockPos, Direction direction) {
+        return blockState.getValue(POWERED) ? 15 : 0;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(POWERED);
+        builder.add(POWERED,LIT);
     }
 
     @Override
     public Item toItem() {
-        return new BlockItem(this, new Item.Properties().tab(ItemGroups.MAIN)).setRegistryName(getRegistryName());
+        return new BlockItem(this, new Item.Properties().tab(ItemGroups.MAIN)).setRegistryName(Objects.requireNonNull(getRegistryName()));
     }
 
     @Override
     public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
+        return true;
+    }
+
+    @Override
+    public boolean isSignalSource(BlockState blockState) {
         return true;
     }
 
@@ -109,20 +103,24 @@ public class RedstoneClock extends HorizontalBlock implements  IItemBlock {
     public void onPlace(BlockState state, World world, BlockPos pos, BlockState odState, boolean p_220082_5_) {
         world.getBlockTicks().scheduleTick(pos,this,1,TickPriority.HIGH);
     }
-
-    protected boolean shouldCycle(World world, BlockPos blockPos, BlockState blockState){
-        return getInputSignal(world,blockPos,blockState) == 0;
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void animateTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
+        if (blockState.getValue(LIT)) spawnParticles(world, blockPos);
     }
 
-    protected int getInputSignal(World world, BlockPos blockPos, BlockState blockState) {
-        Direction direction = blockState.getValue(FACING);
-        BlockPos blockpos = blockPos.relative(direction);
-        int i = world.getSignal(blockpos, direction);
-        if (i >= 15) {
-            return i;
-        } else {
-            BlockState blockstate = world.getBlockState(blockpos);
-            return Math.max(i, blockstate.is(Blocks.REDSTONE_WIRE) ? blockstate.getValue(RedstoneWireBlock.POWER) : 0);
+    private static void spawnParticles(World world, BlockPos blockPos) {
+        Random random = world.random;
+
+        for(Direction direction : Direction.values()) {
+            BlockPos blockpos = blockPos.relative(direction);
+            if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
+                Direction.Axis direction$axis = direction.getAxis();
+                double d1 = direction$axis == Direction.Axis.X ? 0.5D + 0.5625D * (double)direction.getStepX() : (double)random.nextFloat();
+                double d2 = direction$axis == Direction.Axis.Y ? 0.5D + 0.5625D * (double)direction.getStepY() : (double)random.nextFloat();
+                double d3 = direction$axis == Direction.Axis.Z ? 0.5D + 0.5625D * (double)direction.getStepZ() : (double)random.nextFloat();
+                world.addParticle(RedstoneParticleData.REDSTONE, (double)blockPos.getX() + d1, (double)blockPos.getY() + d2, (double)blockPos.getZ() + d3, 0.0D, 0.0D, 0.0D);
+            }
         }
     }
 }
