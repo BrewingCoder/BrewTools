@@ -4,6 +4,7 @@
 |---------------------------------------|:------------------------------:|
 |Minecraft 1.16.5  Build Status          |[![Build Status](https://dev.azure.com/ScottSingleton/BrewTools/_apis/build/status/BrewTools%201.16.5?branchName=1.16.5)](https://dev.azure.com/ScottSingleton/BrewTools/_build/latest?definitionId=5&branchName=1.16.5)|
 |Minecraft 1.18.1 Build Status           |  'working on it!' |
+|Current Workload |[![Board Status](https://dev.azure.com/ScottSingleton/1940e3a4-2605-4607-aa15-582fd3faf25e/2517a951-7349-4a51-a05b-b103041ffef7/_apis/work/boardbadge/8c78c2e3-0f01-4bc8-af0a-17c2943df042)](https://dev.azure.com/ScottSingleton/1940e3a4-2605-4607-aa15-582fd3faf25e/_boards/board/t/2517a951-7349-4a51-a05b-b103041ffef7/Microsoft.EpicCategory/) |
 
 BrewTools, a collection of odds and ends that the Brew Team has enjoyed over the years but can't quite seem to find in today's collection of available mods.
 
