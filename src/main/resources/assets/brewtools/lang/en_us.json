@@ -54,6 +54,7 @@
   "block.brewtools.quarried_smooth_slab" : "Quarried Smooth Stone Slab",
   "block.brewtools.quarried_smooth_wall" : "Quarried Smooth Stone Wall",
 
-  "item.brewtools.goggles" : "Night Vision Goggles"
+  "item.brewtools.goggles" : "Night Vision Goggles",
+  "item.brewtools.golden_lasso" : "Golden Lasso"
 
 }

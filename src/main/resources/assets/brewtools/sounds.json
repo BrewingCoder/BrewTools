@@ -1,0 +1,9 @@
+{
+  "lasso_whoosh": {
+    "category": "items",
+    "subtitle": "brewtools.lasso_whoosh",
+    "sounds": [
+      "brewtools.lasso_whoosh"
+    ]
+  }
+}

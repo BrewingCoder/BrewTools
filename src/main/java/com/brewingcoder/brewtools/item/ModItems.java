@@ -12,6 +12,7 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BrewTools.MODID);
 
     public static final RegistryObject<Item> GOGGLES = ITEMS.register("goggles",  () ->   new NightVisionGoggleItem(ModArmorMaterial.GOOGLES, EquipmentSlotType.HEAD,(new Item.Properties()).tab(ItemGroups.MAIN)));
+    public static final RegistryObject<Item> LASSO = ITEMS.register("golden_lasso",()-> new GoldenLasso(new Item.Properties().tab(ItemGroups.MAIN).stacksTo(1).durability(6).setNoRepair()));
 
     public static void register(IEventBus bus){
         ITEMS.register(bus);

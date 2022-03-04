@@ -4,6 +4,7 @@ import com.brewingcoder.brewtools.blocks.MiningPortalBlock;
 import com.brewingcoder.brewtools.blocks.ModBlocks;
 import com.brewingcoder.brewtools.config.Configs;
 import com.brewingcoder.brewtools.item.ModItems;
+import com.brewingcoder.brewtools.sound.ModSounds;
 import com.brewingcoder.brewtools.tileentity.TileEntityMiningPortal;
 import com.brewingcoder.brewtools.world.OreGeneration;
 import net.minecraft.block.Block;
@@ -48,6 +49,7 @@ public class BrewTools
 
         Configs.register();
 
+        ModSounds.register(bus);
         ModItems.register(bus);
         ModBlocks.register(bus);
 
