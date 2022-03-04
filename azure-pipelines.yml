@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-name: $(Rev:.r)
+name: BrewTools-1.16.5-1.0$(Rev:.r)
 
 steps:
 - script: echo $(Build.BuildNumber)
