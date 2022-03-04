@@ -15,14 +15,17 @@ String build_number = System.getenv().BUILD_BUILDNUMBER
 if(build_number == null) {
     build_number = ".9999"
 }else{
+    println('System Build Number:' + build_number)
     String build_number_parts = build_number.tokenize(".")
     build_number = build_number_parts[build_number_parts.size()-1]
 }
 String semver = "${version_major}.${version_minor}"
+println('Semantic version: ' + semver)
 
 version = "1.16.5-${semver}${build_number}"
 group = "${mod_group}"
 archivesBaseName = "${mod_name}"
+println('Final File Version:' + version)
 
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
