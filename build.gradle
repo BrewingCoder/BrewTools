@@ -15,9 +15,11 @@ String build_number = System.getenv().BUILD_BUILDNUMBER
 if(build_number == null) {
     build_number = ".9999"
 }else{
-    println('System Build Number:' + build_number)
-    String build_number_parts = build_number.tokenize(".")
-    build_number = build_number_parts[build_number_parts.size()-1]
+    println('System Build Number: ' + build_number)
+    String[] build_number_parts = build_number.split(".")
+    println('build number parts: ' + build_number_parts.length)
+    build_number = build_number_parts[build_number_parts.length-1]
+    println('New Build Number: ' + build_number)
 }
 String semver = "${version_major}.${version_minor}"
 println('Semantic version: ' + semver)
