@@ -1,9 +1,16 @@
 {
   "lasso_whoosh": {
-    "category": "items",
-    "subtitle": "brewtools.lasso_whoosh",
+    "category": "player",
+    "subtitle": "subtitles.brewtools.lasso_whoosh",
     "sounds": [
-      "brewtools.lasso_whoosh"
+      "brewtools:lasso_whoosh"
+    ]
+  },
+  "whip": {
+    "category": "player",
+    "subtitle": "subtitles.brewtools.whip",
+    "sounds": [
+      "brewtools:whip"
     ]
   }
 }

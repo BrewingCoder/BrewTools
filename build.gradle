@@ -14,6 +14,9 @@ apply plugin: 'maven-publish'
 String build_number = System.getenv().BUILD_BUILDNUMBER
 if(build_number == null) {
     build_number = ".9999"
+}else{
+    build_number_parts = build_number.tokenize(".")
+    build_number = build_number_parts[build_number_parts.size()-1]
 }
 String semver = "${version_major}.${version_minor}"
 
@@ -77,6 +80,9 @@ dependencies {
             version: "${project.mcversion}-${project.forgeversion}"
     ])
     implementation fg.deobf("curse.maven:worldstripper-250603:3415529")
+    implementation fg.deobf("curse.maven:the-one-proble-245211:3665853")
+    compileOnly fg.deobf("mezz.jei:jei-${project.mcversion}:7.7.1.149:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${project.mcversion}:7.7.1.149")
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.2"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.2"
 }

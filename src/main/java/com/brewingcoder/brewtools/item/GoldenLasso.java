@@ -49,7 +49,7 @@ public class GoldenLasso extends Item {
             BlockPos pos = ctx.getClickedPos();
             PlayerEntity player = ctx.getPlayer();
             if (player == null) return ActionResultType.FAIL;
-
+            player.playSound(ModSounds.LASSO_WHOOSH.get(),2,1);
             CompoundNBT spawn_nbt = nbt.getCompound(NBT_ANIMAL);
             EntityType<?> et = EntityType.by(spawn_nbt).orElse(EntityType.MINECART);
             BlockPos spawn_position = new BlockPos(pos.getX(),pos.getY()+1,pos.getZ());

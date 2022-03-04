@@ -4,13 +4,11 @@ import com.brewingcoder.brewtools.BrewTools;
 import com.brewingcoder.brewtools.blockbase.*;
 import com.brewingcoder.brewtools.item.ItemGroups;
 import com.brewingcoder.brewtools.item.ModItems;
-import com.brewingcoder.brewtools.tileentity.TileEntityMiningPortal;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -87,6 +85,5 @@ public class ModBlocks{
     public static final RegistryObject<Block> QUARRIED_BRICKS_CRACKED_WALL   =registerBlock("quarried_bricks_cracked_wall", () -> new WallBlockBase(BlockProperties.rock(1.0f,8.0f)));
     public static final RegistryObject<Block> QUARRIED_COBBLE_WALL           =registerBlock("quarried_cobble_wall",         () -> new WallBlockBase(BlockProperties.rock(1.0f,8.0f)));
     public static final RegistryObject<Block> QUARRIED_SMOOTH_WALL           =registerBlock("quarried_smooth_wall",         () -> new WallBlockBase(BlockProperties.rock(1.0f,8.0f)));
-
 
 }

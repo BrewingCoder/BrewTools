@@ -1,32 +1,29 @@
 
-modLoader="javafml" #mandatory
-loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+modLoader="javafml"
+loaderVersion="[36,)"
 license="MIT"
-# A URL to refer people to when problems occur with this mod
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
-# A list of mods - how many allowed here is determined by the individual mod loader
+issueTrackerURL="https://github.com/BrewingCoder/BrewTools/issues"
 [[mods]] #mandatory
-# The modid of the mod
 modId="brewtools" #mandatory
-# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-# ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
-# see the associated build.gradle script for how to populate this completely automatically during a build
 version="${file.jarVersion}" #mandatory
- # A display name for the mod
-displayName="Brewer's Tools and items I cry over every day" #mandatory
-# A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
+displayName="BrewTools" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+displayURL="https://github.com/BrewingCoder/BrewTools"
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
+logoFile="https://media.forgecdn.net/avatars/499/803/637817461302487666.png" #optional
 # A text field displayed in the mod UI
-credits="All those that have come before..." #optional
+credits="All those that have come before. Some textures derived from early Invictus resource packs released under CC3 license.  Ideas on tools from the godly rwtema's Extra Utilities" #optional
 # A text field displayed in the mod UI
 authors="BrewingCoder (a.k.a. Brewer, BrewDrinkCode)" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-NVGs that take damage when you use them
+Tools from various mods that are dormant:
+     * Golden Lasso
+     * Redstone Clock
+     * Night Vision Goggles
+     * Flat, Peaceful Mining Dimension
+     * Abyssal and Quarried Stone
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.brewtools]] #optional

@@ -111,7 +111,6 @@ public class RedstoneClock extends Block implements  IItemBlock {
 
     private static void spawnParticles(World world, BlockPos blockPos) {
         Random random = world.random;
-
         for(Direction direction : Direction.values()) {
             BlockPos blockpos = blockPos.relative(direction);
             if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
