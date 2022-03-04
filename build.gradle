@@ -21,7 +21,7 @@ if(build_number == null) {
     build_number = build_number_parts[build_number_parts.length-1]
     println('New Build Number: ' + build_number)
 }
-String semver = "${version_major}.${version_minor}"
+String semver = "${version_major}.${version_minor}."
 println('Semantic version: ' + semver)
 
 version = "1.16.5-${semver}${build_number}"
