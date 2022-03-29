@@ -1,68 +1,64 @@
 package com.brewingcoder.brewtools;
 
-import com.brewingcoder.brewtools.blocks.MiningPortalBlock;
+import com.brewingcoder.brewtools.Items.ModItems;
+import com.brewingcoder.brewtools.blockentities.MiningPortalEntity;
+import com.brewingcoder.brewtools.blocks.ModBlockEntities;
 import com.brewingcoder.brewtools.blocks.ModBlocks;
 import com.brewingcoder.brewtools.config.Configs;
-import com.brewingcoder.brewtools.item.ModItems;
-import com.brewingcoder.brewtools.tileentity.TileEntityMiningPortal;
+import com.brewingcoder.brewtools.sound.ModSounds;
 import com.brewingcoder.brewtools.world.OreGeneration;
-//import net.minecraft.block.Block;
-//import net.minecraft.item.Item;
-//import net.minecraft.tileentity.TileEntityType;
-//import net.minecraft.util.RegistryKey;
-//import net.minecraft.util.ResourceLocation;
-//import net.minecraft.util.registry.Registry;
-//import net.minecraft.world.World;
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-//import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
+
+import java.util.stream.Collectors;
 
 
-@SuppressWarnings("unused")
 @Mod(BrewTools.MODID)
-
 public class BrewTools
 {
+    private static final Logger LOGGER = LogUtils.getLogger();
     public static final String MODID = "brewtools";
-    public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static ResourceKey<Level> MINING_WORLD;
     public static ResourceKey<Level> OVERWORLD;
-    public static BlockEntityType<TileEntityMiningPortal> TE_PORTAL;
+    public static BlockEntityType<MiningPortalEntity> TE_PORTAL;
+    public static final String CURIOS = "curios";
 
-
-
-
-    public BrewTools() {
+    public BrewTools()
+    {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
         Configs.register();
-
         ModItems.register(bus);
         ModBlocks.register(bus);
+        ModSounds.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::enqueueIMC);
         bus.addListener(this::processIMC);
-        bus.addListener(this::doClientStuff);
-        bus.addGenericListener(BlockEntityType.class, this::registerTileEntities);
-
+        bus.addGenericListener(BlockEntityType.class,this::registerTileEntities);
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, OreGeneration::onBiomeLoadingEvent);
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -71,25 +67,28 @@ public class BrewTools
         OVERWORLD = ResourceKey.create(Registry.DIMENSION_REGISTRY,new ResourceLocation("minecraft:overworld"));
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event)
-    {
-    }
-
-    private void enqueueIMC(final InterModEnqueueEvent event)
-    {
-    }
-
-    private void processIMC(final InterModProcessEvent event)
-    {
-    }
-
     private void registerTileEntities(RegistryEvent.Register<BlockEntityType<?>> event){
-     TE_PORTAL = BlockEntityType.Builder.of(
-             TileEntityMiningPortal::new,
-             ModBlocks.MINING_PORTAL.get()).build(null);
-     TE_PORTAL.setRegistryName(new ResourceLocation(MODID,"tileentityportal"));
-     event.getRegistry().registerAll(TE_PORTAL);
+        TE_PORTAL = BlockEntityType.Builder.of(
+                MiningPortalEntity::new,
+                ModBlocks.MINING_PORTAL.get()).build(null);
+        TE_PORTAL.setRegistryName(new ResourceLocation(MODID,"tileentityportal"));
+        event.getRegistry().registerAll(TE_PORTAL);
     }
 
+    private void enqueueIMC(final InterModEnqueueEvent event){
+        InterModComms.sendTo(CURIOS, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().build());
+    }
 
+    private void processIMC(final InterModProcessEvent event){}
+
+    @SubscribeEvent
+    public void onServerStarting(ServerStartingEvent event){}
+
+
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents
+    {
+        @SubscribeEvent
+        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent){}
+    }
 }

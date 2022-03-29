@@ -1,12 +1,9 @@
 package com.brewingcoder.brewtools.config;
 
-
-import org.apache.commons.lang3.tuple.Pair;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.loading.FMLPaths;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.nio.file.Paths;
-
+@SuppressWarnings("unused")
 public class Configs {
     public static final ForgeConfigSpec WORLD_SPEC;
     public static final WorldConfig WORLD;

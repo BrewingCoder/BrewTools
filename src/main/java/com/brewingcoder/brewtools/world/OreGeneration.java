@@ -3,59 +3,71 @@ package com.brewingcoder.brewtools.world;
 import com.brewingcoder.brewtools.BrewTools;
 import com.brewingcoder.brewtools.blocks.ModBlocks;
 import com.brewingcoder.brewtools.config.Configs;
-import com.brewingcoder.brewtools.data.ModTags;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.template.TagMatchRuleTest;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.TopSolidRangeConfig;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.OreFeatures;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-
 @Mod.EventBusSubscriber(modid = BrewTools.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OreGeneration {
 
-    public static ConfiguredFeature<?,?> ABYSSAL_STONE_OVERWORLD;
-    public static ConfiguredFeature<?,?> QUARRIED_STONE_FEATURE;
+    public static Holder<PlacedFeature> ABYSSAL_FEATURE;
+    public static Holder<PlacedFeature> QUARRIED_FEATURE;
 
     @SubscribeEvent
-    public static void createConfiguredOreFeature(FMLCommonSetupEvent event){
-        if (Configs.WORLD.doAbyssal.get()) {
+    public static void createConfiguredOreFeature(FMLCommonSetupEvent event) {
 
-            ABYSSAL_STONE_OVERWORLD =
-                    Feature.ORE.configured(
-                                    new OreFeatureConfig(new TagMatchRuleTest(ModTags.ORE_SPAWNABLE),
-                                            ModBlocks.ABYSSAL.get().defaultBlockState(),
-                                            Configs.WORLD.AbyssalClusterSize.get()))
-                            .decorated(Placement.RANGE.configured(
-                                    new TopSolidRangeConfig(Configs.WORLD.AbyssalMinY.get(),0,Configs.WORLD.AbyssalMaxY.get())))
-                            .squared()
-                            .count(Configs.WORLD.AbyssalNumPerChunk.get());
+        OreConfiguration abyssalConfig = new OreConfiguration(
+                OreFeatures.STONE_ORE_REPLACEABLES,
+                ModBlocks.ABYSSAL.get().defaultBlockState(),
+                Configs.WORLD.AbyssalClusterSize.get()
+                );
 
-            Registry.register(WorldGenRegistries.CONFIGURED_FEATURE,"abyssal_stone_overworld_generation",OreGeneration.ABYSSAL_STONE_OVERWORLD);
-        }else{
-            ABYSSAL_STONE_OVERWORLD = null;
-        }
-        if (Configs.WORLD.doQuarried.get()) {
+        ABYSSAL_FEATURE = registerPlacedFeature(
+                "abyssal_overworld",
+                new ConfiguredFeature<>(Feature.ORE,abyssalConfig),
+                CountPlacement.of(Configs.WORLD.AbyssalNumPerChunk.get()),
+                InSquarePlacement.spread(),
+                BiomeFilter.biome(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(Configs.WORLD.AbyssalMinY.get()),VerticalAnchor.absolute(Configs.WORLD.AbyssalMaxY.get()))
+                );
 
-            QUARRIED_STONE_FEATURE =
-                    Feature.ORE.configured(
-                                    new OreFeatureConfig(new TagMatchRuleTest(ModTags.ORE_SPAWNABLE),
-                                            ModBlocks.QUARRIED.get().defaultBlockState(),
-                                            Configs.WORLD.QuarriedClusterSize.get()))
-                            .decorated(Placement.RANGE.configured(
-                                    new TopSolidRangeConfig(Configs.WORLD.QuarriedMinY.get(),0,Configs.WORLD.QuarriedMaxY.get())))
-                            .squared()
-                            .count(Configs.WORLD.QuarriedNumPerChunk.get());
+        OreConfiguration quarriedConfig = new OreConfiguration(
+                OreFeatures.STONE_ORE_REPLACEABLES,
+                ModBlocks.QUARRIED.get().defaultBlockState(),
+                Configs.WORLD.QuarriedClusterSize.get()
+        );
 
-            Registry.register(WorldGenRegistries.CONFIGURED_FEATURE,"quarried_stone_overworld_generation",OreGeneration.QUARRIED_STONE_FEATURE);
-        }else{
-            QUARRIED_STONE_FEATURE = null;
+        QUARRIED_FEATURE = registerPlacedFeature(
+                "quarried_overworld",
+                new ConfiguredFeature<>(Feature.ORE,quarriedConfig),
+                CountPlacement.of(Configs.WORLD.QuarriedNumPerChunk.get()),
+                InSquarePlacement.spread(),
+                BiomeFilter.biome(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(Configs.WORLD.QuarriedMinY.get()),VerticalAnchor.belowTop(Configs.WORLD.QuarriedMaxY.get()))
+        );
+
+    }
+
+    private static <C extends FeatureConfiguration, F extends Feature<C>> Holder<PlacedFeature> registerPlacedFeature(String registryName, ConfiguredFeature<C, F> feature, PlacementModifier... placementModifiers) {
+        return PlacementUtils.register(registryName, Holder.direct(feature), placementModifiers);
+    }
+
+    public static void onBiomeLoadingEvent(BiomeLoadingEvent event){
+        if(event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND){
+            event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ABYSSAL_FEATURE);
+            event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, QUARRIED_FEATURE);
         }
     }
 }

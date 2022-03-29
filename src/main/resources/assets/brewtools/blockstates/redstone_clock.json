@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=true"   : {"model" :  "brewtools:block/redstone_clock_on"},
+    "powered=false"  : {"model": "brewtools:block/redstone_clock"}
+  }
+}

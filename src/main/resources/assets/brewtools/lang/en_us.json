@@ -3,6 +3,7 @@
 
   "block.brewtools.mining_portal" : "Portal to Mining World",
   "block.brewtools.abyssal" : "Abyssal Stone",
+  "block.brewtools.redstone_clock" : "Redstone Clock",
 
   "block.brewtools.abyssal_bricks" : "Abyssal Stone Bricks",
   "block.brewtools.abyssal_bricks_cracked" : "Cracked Abyssal Stone Bricks",
@@ -43,6 +44,11 @@
   "block.brewtools.quarried_bricks_slab": "Quarried Stone Brick Slab",
   "block.brewtools.quarried_bricks_wall": "Quarried Stone Brick Wall",
 
+  "block.brewtools.quarried_bricks_cracked" : "Quarried Stone Bricks",
+  "block.brewtools.quarried_bricks_cracked_stairs": "Quarried Stone Brick Stairs",
+  "block.brewtools.quarried_bricks_cracked_slab": "Quarried Stone Brick Slab",
+  "block.brewtools.quarried_bricks_cracked_wall": "Quarried Stone Brick Wall",
+
   "block.brewtools.quarried_cobble" : "Quarried Cobblestone",
   "block.brewtools.quarried_cobble_stairs" : "Quarried Cobblestone Stairs",
   "block.brewtools.quarried_cobble_slab" : "Quarried Cobblestone Slab",
@@ -53,6 +59,10 @@
   "block.brewtools.quarried_smooth_slab" : "Quarried Smooth Stone Slab",
   "block.brewtools.quarried_smooth_wall" : "Quarried Smooth Stone Wall",
 
-  "item.brewtools.goggles" : "Night Vision Goggles"
+  "item.brewtools.goggles" : "Night Vision Goggles",
+  "item.brewtools.golden_lasso" : "Golden Lasso",
+
+  "subtitles.brewtools.lasso_whoosh" : "Lasso Whoosh Sound",
+  "subtitles.brewtools.whip" : "Whip Crack"
 
 }

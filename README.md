@@ -2,9 +2,11 @@
 
 | Minecraft Version|Status|
 |---------------------------------------|:------------------------------:|
-|Minecraft 1.16.5  Build Status          |[![Build Status](https://dev.azure.com/ScottSingleton/BrewTools/_apis/build/status/BrewTools%201.16.5?branchName=1.16.5)](https://dev.azure.com/ScottSingleton/BrewTools/_build/latest?definitionId=5&branchName=1.16.5)|
-|Minecraft 1.18.1 Build Status           |  'working on it!' |
-|Current Workload |[![Board Status](https://dev.azure.com/ScottSingleton/1940e3a4-2605-4607-aa15-582fd3faf25e/2517a951-7349-4a51-a05b-b103041ffef7/_apis/work/boardbadge/8c78c2e3-0f01-4bc8-af0a-17c2943df042)](https://dev.azure.com/ScottSingleton/BrewTools/_workitems) |
+|Minecraft 1.16.5  Build Status          | Needs Updating|
+|Minecraft 1.18.2 Build Status           |  'working on it!' |
+|Minecraft 1.19 Build Status             | Waiting on Forge Snapshot |
+
+
 
 BrewTools, a collection of odds and ends that the Brew Team has enjoyed over the years but can't quite seem to find in today's collection of available mods.
 
@@ -36,5 +38,4 @@ TODOS:
 |Netherrite|Full chunk|2|
 
 *Make mining dimension fully configurable when it comes to ore spawning.  give 100% control to modpack creator in a JSON file.
-
 

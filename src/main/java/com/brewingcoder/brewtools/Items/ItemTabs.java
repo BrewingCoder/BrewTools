@@ -1,16 +1,13 @@
-package com.brewingcoder.brewtools.item;
+package com.brewingcoder.brewtools.Items;
 
 import com.brewingcoder.brewtools.BrewTools;
-//import net.minecraft.item.ItemGroup;
-//import net.minecraft.item.ItemStack;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemGroups {
-    public static final CreativeModeTab  MAIN = new CreativeModeTab(BrewTools.MODID) {
-
+public class ItemTabs {
+    public static final CreativeModeTab MAIN = new CreativeModeTab(BrewTools.MODID) {
 
         @Override
         @OnlyIn(Dist.CLIENT)

@@ -4,10 +4,9 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
-
+import org.apache.commons.lang3.tuple.Pair;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +15,7 @@ import java.util.function.Function;
 
 @SuppressWarnings("unused")
 public class Config {
-    public static final Marker MARKER = new MarkerManager.Log4jMarker("Config");
+    public static final Marker MARKER = new MarkerManager.Log4jMarker("config");
 
     public static String createConfigDir(String path) {
         try {
