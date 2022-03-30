@@ -3,7 +3,7 @@
 | Minecraft Version|Status|
 |---------------------------------------|:------------------------------:|
 |Minecraft 1.16.5  Build Status          | Needs Updating|
-|Minecraft 1.18.2 Build Status           |  'working on it!' |
+|Minecraft 1.18.2 Build Status           | ![TeamCity build status](https://teamcity.brewingcoder.com/app/rest/builds/buildType:id:BrewTools_Build/statusIcon.svg)|
 |Minecraft 1.19 Build Status             | Waiting on Forge Snapshot |
 
 
