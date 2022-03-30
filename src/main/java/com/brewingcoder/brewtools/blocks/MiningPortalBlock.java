@@ -1,20 +1,16 @@
 package com.brewingcoder.brewtools.blocks;
 
 import com.brewingcoder.brewtools.BrewTools;
-import com.brewingcoder.brewtools.Items.ItemTabs;
 import com.brewingcoder.brewtools.blockentities.MiningPortalEntity;
 import com.brewingcoder.brewtools.world.MiningWorldTeleporter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -34,13 +30,6 @@ public class MiningPortalBlock extends Block implements EntityBlock {
         super(props);
     }
 
-//    @Override
-//    public Item asItem() {
-//        ResourceLocation rl = getRegistryName();
-//        if (rl != null) {
-//            return new BlockItem(this, new Item.Properties().tab(ItemTabs.MAIN)).setRegistryName(getRegistryName());
-//        }else return null;
-//    }
 
     @Override
     public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {

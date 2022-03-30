@@ -17,7 +17,7 @@ apply plugin: 'idea'
 apply plugin: 'maven-publish'
 
 
-String build_number = System.getProperty("build.number")
+String build_number = rootProject.properties.get("build.number")
 if(build_number == null) {
     build_number = ".9999"
 }

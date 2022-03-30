@@ -27,9 +27,8 @@ public class MiningWorldTeleporter implements ITeleporter {
     @Override
     public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
         Entity e = repositionEntity.apply(false);
-        if(!(e instanceof ServerPlayer)) return e;
+        if(!(e instanceof ServerPlayer player)) return e;
 
-        ServerPlayer player = (ServerPlayer) e;
         ChunkAccess chunk = destWorld.getChunk(pos);
         BlockPos portalBlockPos = findPortalBlockInChunk(chunk);
         if (portalBlockPos == null){

@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+@SuppressWarnings("unused")
 public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, BrewTools.MODID);
 
@@ -15,9 +16,7 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> WHIP_CRACK = registerSoundEvent("whip");
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
-        RegistryObject<SoundEvent> registryObject =
-                SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(BrewTools.MODID,name)));
-        return registryObject;
+        return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(BrewTools.MODID,name)));
     }
     public static void register(IEventBus bus){ SOUND_EVENTS.register(bus);}
 }

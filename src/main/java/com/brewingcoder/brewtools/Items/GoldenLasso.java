@@ -13,7 +13,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -55,7 +54,6 @@ public class GoldenLasso extends Item {
             CompoundTag spawn_nbt = nbt.getCompound(NBT_ANIMAL);
             EntityType<?> et = EntityType.by(spawn_nbt).orElse(EntityType.DONKEY);
             BlockPos spawn_position = new BlockPos(pos.getX(),pos.getY()+1,pos.getZ());
-            //et.create((ServerLevel)world,spawn_nbt,null,player,spawn_position,MobSpawnType.MOB_SUMMONED,false,false);
             et.spawn((ServerLevel)world,spawn_nbt,null,player,spawn_position, MobSpawnType.COMMAND,false,false );
             itemStack.removeTagKey(NBT_HAS_ANIMAL);
             itemStack.removeTagKey(NBT_ANIMAL);
@@ -71,7 +69,7 @@ public class GoldenLasso extends Item {
 
         if(livingEntity instanceof Monster){
             player.displayClientMessage(new TranslatableComponent(livingEntity.getName().getString() + " is a Monster!"),true);
-        }else if(livingEntity instanceof Merchant || livingEntity instanceof Villager) {
+        }else if(livingEntity instanceof Merchant) {
             player.displayClientMessage(new TranslatableComponent(livingEntity.getName().getString() + " is a Merchant or Villager!"),true);
         }else{
             player.displayClientMessage(new TranslatableComponent("Capturing " + livingEntity.getName().getString() ),true);

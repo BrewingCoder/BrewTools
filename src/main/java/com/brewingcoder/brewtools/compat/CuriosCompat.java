@@ -10,7 +10,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -27,6 +26,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class CuriosCompat {
     private static final ResourceLocation GOGGLE_TEXTURE = new ResourceLocation(BrewTools.MODID,"textures/item/goggles.png");
 
@@ -35,8 +35,7 @@ public class CuriosCompat {
 
             @Override
             public void curioTick(SlotContext slotContext) {
-                if (itemstack.getItem() instanceof NightVisionGoggleItem && slotContext.entity() instanceof Player){
-                    Player player = (Player)slotContext.entity();
+                if (itemstack.getItem() instanceof NightVisionGoggleItem && slotContext.entity() instanceof Player player){
                     player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION,240,1));
                 }
             }
