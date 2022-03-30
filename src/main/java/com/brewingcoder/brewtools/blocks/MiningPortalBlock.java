@@ -4,6 +4,7 @@ import com.brewingcoder.brewtools.BrewTools;
 import com.brewingcoder.brewtools.blockentities.MiningPortalEntity;
 import com.brewingcoder.brewtools.world.MiningWorldTeleporter;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -67,8 +68,11 @@ public class MiningPortalBlock extends Block implements EntityBlock {
         random.nextFloat();
         BlockEntity te = world.getBlockEntity(pos);
         if(te instanceof MiningPortalEntity){
-            world.addParticle(ParticleTypes.PORTAL, pos.getX() +  (random.nextDouble() - 0.5) * 1.5, pos.getY() + 2, pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 1.5, 0, 0, 0);
-            world.addParticle(ParticleTypes.ENCHANT, pos.getX() + (random.nextDouble() - 0.5) * 1.5, pos.getY() + 2, pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 1.5, 0, 0, 0);
+            doParticles(ParticleTypes.PORTAL,world,pos,random);
+            doParticles(ParticleTypes.ENCHANT,world,pos,random);
         }
+    }
+    private void doParticles(ParticleOptions particleOptions,Level world, BlockPos pos, Random random){
+            world.addParticle(particleOptions, pos.getX() +  (random.nextDouble() - 0.5) * 1.5, pos.getY() + 2, pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 1.5, 0, 0, 0);
     }
 }
