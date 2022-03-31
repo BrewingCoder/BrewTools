@@ -12,6 +12,7 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
     id "com.github.breadmoirai.github-release" version "2.2.12"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'idea'
@@ -32,7 +33,7 @@ archivesBaseName = "${mod_name}"
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-println("Variable: ${githubToken}")
+
 
 minecraft {
     mappings channel: 'official', version: project.mcversion
@@ -144,12 +145,23 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
-task pubRelease {
-    doLast {
-        println("Contents of Archive Directory")
-        File srcDir
-        collection = files{srcDir.listFiles()}
-        srcDir = file('lib')
-        collection.collect{relativePath(it)}.sort().each{println it}
-    }
+githubRelease {
+    token {githubToken} // This is your personal access token with Repo permissions
+    // You get this from your user settings > developer settings > Personal Access Tokens
+    owner "brewingcoder" // default is the last part of your group. Eg group: "com.github.breadmoirai" => owner: "breadmoirai"
+    repo { mod_name } // by default this is set to your project name
+    tagName version // by default this is set to "v${project.version}"
+    targetCommitish "master" // by default this is set to "master"
+    releaseName version // Release title, by default this is the same as the tagName
+    body """\
+## CHANGELOG
+${changelog().call()}
+"""
+    draft false // by default this is false
+    prerelease false // by default this is false
+    releaseAssets = jar.destinationDir.listFiles()
+
+    overwrite false // by default false; if set to true, will delete an existing release with the same tag and name
+    dryRun false // by default false; you can use this to see what actions would be taken without making a release
+    apiEndpoint "https://api.github.com" // should only change for github enterprise users
 }
