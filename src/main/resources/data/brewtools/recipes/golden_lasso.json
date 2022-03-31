@@ -1,0 +1,20 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "aab",
+    "aab",
+    "bba"
+  ],
+  "key" : {
+    "a" : {
+      "tag" : "forge:string"
+    },
+    "b" : {
+      "tag" : "forge:nuggets/gold"
+    }
+  },
+  "result" : {
+    "item" : "brewtools:golden_lasso",
+    "count" : 1
+  }
+}
