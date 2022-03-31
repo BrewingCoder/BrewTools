@@ -146,6 +146,10 @@ tasks.withType(JavaCompile).configureEach {
 
 task pubRelease {
     doLast {
-        collection = layout.files{}
+        println("Contents of Archive Directory")
+        File srcDir
+        collection = files{srcDir.listFiles()}
+        srcDir = file('lib')
+        collection.collect{relativePath(it)}.sort().each{println it}
     }
 }
