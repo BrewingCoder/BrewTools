@@ -145,7 +145,12 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
+def names=[]
+fileTree("build/libs").visit {FileVisitDetails details -> names << details.file.path }
 githubRelease {
+
+
+
     token {githubToken} // This is your personal access token with Repo permissions
     // You get this from your user settings > developer settings > Personal Access Tokens
     owner "brewingcoder" // default is the last part of your group. Eg group: "com.github.breadmoirai" => owner: "breadmoirai"
@@ -159,9 +164,12 @@ ${changelog().call()}
 """
     draft false // by default this is false
     prerelease false // by default this is false
-    releaseAssets = jar.destinationDir.listFiles()
+
+
+    releaseAssets=names
+
 
     overwrite false // by default false; if set to true, will delete an existing release with the same tag and name
-    dryRun false // by default false; you can use this to see what actions would be taken without making a release
+    dryRun true // by default false; you can use this to see what actions would be taken without making a release
     apiEndpoint "https://api.github.com" // should only change for github enterprise users
 }
