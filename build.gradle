@@ -150,7 +150,7 @@ fileTree("build/libs").visit {FileVisitDetails details -> names << details.file.
 githubRelease {
 
 
-
+    version = "${semver}${dep_BrewTools_Build_build_number}"
     token {githubToken} // This is your personal access token with Repo permissions
     // You get this from your user settings > developer settings > Personal Access Tokens
     owner "brewingcoder" // default is the last part of your group. Eg group: "com.github.breadmoirai" => owner: "breadmoirai"
