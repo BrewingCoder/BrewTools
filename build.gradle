@@ -1,3 +1,4 @@
+//file:noinspection GroovyAssignabilityCheck
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
@@ -148,30 +149,41 @@ tasks.withType(JavaCompile).configureEach {
 def names=[]
 fileTree("build/libs").visit {FileVisitDetails details -> names << details.file.path }
 githubRelease {
-
-    if (project.hasProperty('dep_bt2_build_number')) {
-        println("Found dep build number!")
-        version = "${semver}${dep_bt2_build_number}"
-    }
-    token {githubToken} // This is your personal access token with Repo permissions
-    // You get this from your user settings > developer settings > Personal Access Tokens
-    owner "brewingcoder" // default is the last part of your group. Eg group: "com.github.breadmoirai" => owner: "breadmoirai"
-    repo { mod_name } // by default this is set to your project name
-    tagName version // by default this is set to "v${project.version}"
-    targetCommitish "master" // by default this is set to "master"
-    releaseName version // Release title, by default this is the same as the tagName
+    token {githubToken}
+    owner "brewingcoder"
+    repo { mod_name }
+    tagName version
+    targetCommitish "master"
+    releaseName version
     body """\
 ## CHANGELOG
 ${changelog().call()}
 """
-    draft false // by default this is false
-    prerelease false // by default this is false
-
-
+    draft false
+    prerelease false
     releaseAssets=names
-
-
-    overwrite false // by default false; if set to true, will delete an existing release with the same tag and name
-    dryRun true // by default false; you can use this to see what actions would be taken without making a release
-    apiEndpoint "https://api.github.com" // should only change for github enterprise users
+    overwrite false
+    dryRun true
+    apiEndpoint "https://api.github.com"
 }
+
+curseforge {
+    //rootProject.properties.get("build.number")
+    apiKey = {curseToken}
+    project{
+        id = "585247"
+        addGameVersion "1.18.2"
+        releaseType="release"
+        mainArtifact("build/libs/BrewTools-${version}.jar")
+        relations {
+            requiredDependency 'curios'
+        }
+    }
+    options {
+        debug = true
+        javaVersionAutoDetect = true
+        javaIntegration = false
+        forgeGradleIntegration = false
+    }
+}
+
