@@ -169,7 +169,7 @@ ${changelog().call()}
 
 curseforge {
     //rootProject.properties.get("build.number")
-    apiKey = {curseToken}
+    apiKey = "${curseToken}"
     project{
         id = "585247"
         addGameVersion "1.18.2"
@@ -180,6 +180,7 @@ curseforge {
         }
     }
     options {
+        //noinspection GrDeprecatedAPIUsage
         debug = true
         javaVersionAutoDetect = true
         javaIntegration = false
