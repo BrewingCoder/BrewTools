@@ -5,10 +5,7 @@ import com.brewingcoder.brewtools.Items.ItemTabs;
 import com.brewingcoder.brewtools.Items.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -36,7 +33,10 @@ public class ModBlocks {
         return ModItems.ITEMS.register(name,() -> new BlockItem(block.get(),new Item.Properties().tab(ItemTabs.MAIN)));
     }
     
-    private static final BlockBehaviour.Properties defaultProps = BlockBehaviour.Properties.of(Material.STONE);
+    private static final BlockBehaviour.Properties defaultProps = BlockBehaviour.Properties
+            .of(Material.STONE)
+            .sound(SoundType.STONE)
+            .strength(0.2f,0.2f);
 
     public static final RegistryObject<Block> REDSTONE_CLOCK            = registerBlock("redstone_clock", ()->new RedstoneClock(BlockBehaviour.Properties.of(Material.WOOL).lightLevel((lvl)->15)));
     public static final RegistryObject<Block> MINING_PORTAL             = registerBlock("mining_portal",()->new MiningPortalBlock(defaultProps));
