@@ -161,6 +161,7 @@ githubRelease {
 ## BrewTools 1.18.2 CHANGELOG
 # 1.2.x
 #============================
+
 ${changelog().call()}
 """
     draft false
@@ -177,7 +178,7 @@ curseforge {
         id = "585247"
         addGameVersion "1.18.2"
         releaseType="release"
-        changelogType = "markdown"
+        changelogType = "text"
         changelog = "${githubRelease.body.get()}"
 
         mainArtifact("build/libs/BrewTools-${version}.jar") {
