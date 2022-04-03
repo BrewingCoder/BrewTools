@@ -1,199 +1,47 @@
-//file:noinspection GroovyAssignabilityCheck
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-    }
-}
-
 plugins {
-    id 'eclipse'
-    id 'maven-publish'
-    id "com.github.breadmoirai.github-release" version "2.2.12"
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "0.10.0-SNAPSHOT" apply false
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'idea'
-apply plugin: 'maven-publish'
 
-
-String build_number = rootProject.properties.get("build.number")
-if(build_number == null) {
-    build_number = "9999"
+architectury {
+    minecraft = rootProject.minecraft_version
 }
-String semver = "${mcversion}-${version_major}.${version_minor}."
 
-version = "${semver}${build_number}"
-group = "${mod_group}"
-archivesBaseName = "${mod_name}"
+subprojects {
+    apply plugin: "dev.architectury.loom"
+    loom {
+        silentMojangMappingsLicense()
+    }
 
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-
-
-minecraft {
-    mappings channel: 'official', version: project.mcversion
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'brewtools'
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-        gameTestServer {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        mappings loom.officialMojangMappings()
     }
 }
 
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+    archivesBaseName = rootProject.archives_base_name
+    version = rootProject.mod_version
+    group = rootProject.maven_group
 
-repositories {
-    maven {
-        url "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven { url "https://maven.theillusivec4.top/" }
-}
-
-
-
-dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.32'
-    implementation fg.deobf("curse.maven:worldstripper-250603:3670854")
-    implementation fg.deobf("curse.maven:configured-457570:3640884")
-
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-    compileOnly fg.deobf("curse.maven:jei-238222:3696757")
-    runtimeOnly fg.deobf("curse.maven:jei-238222:3696757")
-}
-
-// Example for how to get properties into the manifest for reading at runtime.
-jar {
-    manifest {
-        attributes([
-                "FMLAT" : 'accesstransformer.cfg',
-                "Specification-Title"     : mod_name,
-                "Specification-Vendor"    : mod_group,
-                "Specification-Version"   : "${semver}",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${project.version}",
-                "Implementation-Vendor"   : mod_group,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
-
-
-jar.finalizedBy('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
     repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
+        // Add repositories to retrieve artifacts from in here.
+        // You should only use this when depending on other mods because
+        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+        // for more information about repositories.
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.release = 16
+    }
+
+    java {
+        withSourcesJar()
     }
 }
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-}
-
-def names=[]
-fileTree("build/libs").visit {FileVisitDetails details -> names << details.file.path }
-githubRelease {
-    token {githubToken}
-    owner "brewingcoder"
-    repo { mod_name }
-    tagName version
-    targetCommitish "master"
-    releaseName version
-    body """\
-## BrewTools 1.18.2 CHANGELOG
-# 1.2.x
-#============================
-
-${changelog().call()}
-"""
-    draft false
-    prerelease false
-    releaseAssets=names
-    overwrite false
-    dryRun false
-    apiEndpoint "https://api.github.com"
-}
-
-curseforge {
-    apiKey = "${curseToken}"
-    project{
-        id = "585247"
-        addGameVersion "1.18.2"
-        releaseType="release"
-        changelogType = "text"
-        changelog = "${githubRelease.body.get()}"
-
-        mainArtifact("build/libs/BrewTools-${version}.jar") {
-            displayName = "BrewTools ${version}"
-        }
-        relations {
-            requiredDependency 'curios'
-        }
-    }
-    options {
-        //noinspection GrDeprecatedAPIUsage
-        debug = false
-        javaVersionAutoDetect = true
-        javaIntegration = false
-        forgeGradleIntegration = false
-    }
-}
-
