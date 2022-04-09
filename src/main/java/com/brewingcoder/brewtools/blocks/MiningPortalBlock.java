@@ -34,7 +34,9 @@ public class MiningPortalBlock extends Block implements EntityBlock {
 
     @Override
     public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+        BrewTools.LOGGER.debug("Player Interaction with Portal Block");
         if(player instanceof ServerPlayer && !player.isCrouching()){
+            BrewTools.LOGGER.debug("Player is ServerPlayer and Not Crouching");
             teleportPlayer((ServerPlayer)player,pos);
             return InteractionResult.SUCCESS;
         }
@@ -48,6 +50,7 @@ public class MiningPortalBlock extends Block implements EntityBlock {
 
     public void teleportPlayer(ServerPlayer player, BlockPos pos){
         if(player.getVehicle() != null || player.isVehicle()){
+            BrewTools.LOGGER.debug("Player is a/in vehicle. Cannot Teleport");
             return;
         }
         MinecraftServer server = player.getServer();
@@ -56,8 +59,12 @@ public class MiningPortalBlock extends Block implements EntityBlock {
             ServerLevel overworld = server.overworld();
             player.changeDimension(overworld, new MiningWorldTeleporter(pos));
         }else{
+            BrewTools.LOGGER.debug("Player is not in mining_world, send there");
             ServerLevel miningWorld = player.server.getLevel(BrewTools.MINING_WORLD);
-            if (miningWorld == null) return;
+            if (miningWorld == null){
+                BrewTools.LOGGER.error("Mining World Dimension NOT located. Was it registered properly?");
+                return;
+            }
             player.changeDimension(miningWorld, new MiningWorldTeleporter(pos));
         }
     }

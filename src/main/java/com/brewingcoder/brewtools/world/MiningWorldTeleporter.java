@@ -1,5 +1,6 @@
 package com.brewingcoder.brewtools.world;
 
+import com.brewingcoder.brewtools.BrewTools;
 import com.brewingcoder.brewtools.blocks.MiningPortalBlock;
 import com.brewingcoder.brewtools.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -21,6 +22,7 @@ public class MiningWorldTeleporter implements ITeleporter {
 
     public MiningWorldTeleporter(BlockPos pos)
     {
+        BrewTools.LOGGER.debug("<ITeleporter>MiningWorldTeleporter instantiated");
         this.pos = pos;
     }
 

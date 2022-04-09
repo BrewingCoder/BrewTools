@@ -34,7 +34,7 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 @Mod(BrewTools.MODID)
 public class BrewTools
 {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MODID = "brewtools";
     public static ResourceKey<Level> MINING_WORLD;
     public static ResourceKey<Level> OVERWORLD;
