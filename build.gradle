@@ -102,14 +102,14 @@ repositories {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.32'
-    implementation fg.deobf("curse.maven:worldstripper-250603:3670854")
-    implementation fg.deobf("curse.maven:configured-457570:3640884")
+    minecraft "net.minecraftforge:forge:${mcversion}-${forgeversion}"
+    //implementation fg.deobf("curse.maven:worldstripper-250603:3670854")
+    //implementation fg.deobf("curse.maven:configured-457570:3640884")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-    compileOnly fg.deobf("curse.maven:jei-238222:3696757")
-    runtimeOnly fg.deobf("curse.maven:jei-238222:3696757")
+    compileOnly fg.deobf("curse.maven:jei-238222:3712260")
+    runtimeOnly fg.deobf("curse.maven:jei-238222:3712260")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
@@ -158,8 +158,8 @@ githubRelease {
     targetCommitish "master"
     releaseName version
     body """\
-## BrewTools 1.18.2 CHANGELOG
-# 1.2.x
+## BrewTools 1.18.1 CHANGELOG
+# 1.1.x
 #============================
 
 ${changelog().call()}
@@ -176,7 +176,7 @@ curseforge {
     apiKey = "${curseToken}"
     project{
         id = "585247"
-        addGameVersion "1.18.2"
+        addGameVersion "1.18.1"
         releaseType="release"
         changelogType = "text"
         changelog = "${githubRelease.body.get()}"

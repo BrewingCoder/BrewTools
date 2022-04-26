@@ -6,7 +6,6 @@ import com.brewingcoder.brewtools.blocks.ModBlocks;
 import com.brewingcoder.brewtools.config.Configs;
 import com.brewingcoder.brewtools.sound.ModSounds;
 import com.brewingcoder.brewtools.world.OreGeneration;
-import com.mojang.logging.LogUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -25,16 +24,16 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @SuppressWarnings("unused")
 @Mod(BrewTools.MODID)
 public class BrewTools
 {
-    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "brewtools";
     public static ResourceKey<Level> MINING_WORLD;
     public static ResourceKey<Level> OVERWORLD;
@@ -54,7 +53,7 @@ public class BrewTools
         bus.addListener(this::processIMC);
         bus.addGenericListener(BlockEntityType.class,this::registerTileEntities);
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, OreGeneration::onBiomeLoadingEvent);
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, OreGeneration::onBiomeLoadingEvent);
     }
 
     private void setup(final FMLCommonSetupEvent event)

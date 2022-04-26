@@ -36,7 +36,7 @@ public class ModBlocks {
     private static final BlockBehaviour.Properties defaultProps = BlockBehaviour.Properties
             .of(Material.STONE)
             .sound(SoundType.STONE)
-            .strength(0.2f,0.2f);
+            .strength(0.2f,0.2f).requiresCorrectToolForDrops();
 
     public static final RegistryObject<Block> REDSTONE_CLOCK            = registerBlock("redstone_clock", ()->new RedstoneClock(BlockBehaviour.Properties.of(Material.WOOL).lightLevel((lvl)->15)));
     public static final RegistryObject<Block> MINING_PORTAL             = registerBlock("mining_portal",()->new MiningPortalBlock(defaultProps));
