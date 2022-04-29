@@ -1,0 +1,20 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key" : {
+    "a" : {
+      "tag" : "forge:string"
+    },
+    "b" : {
+      "tag" : "forge:gems/emerald"
+    }
+  },
+  "result" : {
+    "item" : "brewtools:emerald_lasso",
+    "count" : 1
+  }
+}

@@ -38,13 +38,13 @@ public class ModBlocks {
             .sound(SoundType.STONE)
             .strength(0.2f,0.2f);
 
-    public static final RegistryObject<Block> REDSTONE_CLOCK            = registerBlock("redstone_clock", ()->new RedstoneClock(BlockBehaviour.Properties.of(Material.WOOL).lightLevel((lvl)->15)));
-    public static final RegistryObject<Block> MINING_PORTAL             = registerBlock("mining_portal",()->new MiningPortalBlock(defaultProps));
-    public static final RegistryObject<Block> ABYSSAL                   = registerBlock("abyssal",()-> new Block(defaultProps));
-    public static final RegistryObject<Block> ABYSSAL_BRICKS            = registerBlock("abyssal_bricks",() -> new Block(defaultProps));
-    public static final RegistryObject<Block> ABYSSAL_BRICKS_CRACKED    = registerBlock("abyssal_bricks_cracked", () -> new Block(defaultProps));
-    public static final RegistryObject<Block> ABYSSAL_COBBLE            = registerBlock("abyssal_cobble",()-> new Block(defaultProps));
-    public static final RegistryObject<Block> ABYSSAL_SMOOTH            = registerBlock("abyssal_smooth",()-> new Block(defaultProps));
+    public static final RegistryObject<Block> REDSTONE_CLOCK                = registerBlock("redstone_clock", ()->new RedstoneClock(BlockBehaviour.Properties.of(Material.WOOL).lightLevel((lvl)->15)));
+    public static final RegistryObject<Block> MINING_PORTAL                 = registerBlock("mining_portal",()->new MiningPortalBlock(defaultProps));
+    public static final RegistryObject<OreBlock> ABYSSAL                    = registerBlock("abyssal",()-> new OreBlock(defaultProps));
+    public static final RegistryObject<Block> ABYSSAL_BRICKS                = registerBlock("abyssal_bricks",() -> new Block(defaultProps));
+    public static final RegistryObject<Block> ABYSSAL_BRICKS_CRACKED        = registerBlock("abyssal_bricks_cracked", () -> new Block(defaultProps));
+    public static final RegistryObject<Block> ABYSSAL_COBBLE                = registerBlock("abyssal_cobble",()-> new Block(defaultProps));
+    public static final RegistryObject<Block> ABYSSAL_SMOOTH                = registerBlock("abyssal_smooth",()-> new Block(defaultProps));
 
     public static final RegistryObject<Block> ABYSSAL_STAIRS                 = registerBlock("abyssal_stairs", ()->new  StairBlock(ModBlocks.ABYSSAL.get().defaultBlockState(),defaultProps));
     public static final RegistryObject<Block> ABYSSAL_BRICK_STAIRS           = registerBlock("abyssal_brick_stairs",()->new StairBlock(ModBlocks.ABYSSAL_BRICKS.get().defaultBlockState(),defaultProps));
@@ -64,7 +64,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ABYSSAL_COBBLE_WALL            = registerBlock("abyssal_cobble_wall", () -> new WallBlock(defaultProps));
     public static final RegistryObject<Block> ABYSSAL_SMOOTH_WALL            = registerBlock("abyssal_smooth_wall", () -> new WallBlock(defaultProps));
 
-    public static final RegistryObject<Block> QUARRIED                       =registerBlock("quarried",   () -> new Block(defaultProps));
+    public static final RegistryObject<OreBlock> QUARRIED                    =registerBlock("quarried",   () -> new OreBlock(defaultProps));
     public static final RegistryObject<Block> QUARRIED_BRICKS                =registerBlock("quarried_bricks",  () -> new Block(defaultProps));
     public static final RegistryObject<Block> QUARRIED_BRICKS_CRACKED        =registerBlock("quarried_bricks_cracked",   () -> new Block(defaultProps));
     public static final RegistryObject<Block> QUARRIED_COBBLE                =registerBlock("quarried_cobble",   () -> new Block(defaultProps));

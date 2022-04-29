@@ -22,6 +22,7 @@ public class ModItems {
                             .rarity(Rarity.UNCOMMON)
             ));
     public static final RegistryObject<Item> LASSO = ITEMS.register("golden_lasso", ()-> new GoldenLasso(new Item.Properties().tab(ItemTabs.MAIN).stacksTo(1).durability(6).setNoRepair()));
+    public static final RegistryObject<Item> EMERALD_LASSO = ITEMS.register("emerald_lasso", ()-> new EmeraldLasso(new Item.Properties().tab(ItemTabs.MAIN).stacksTo(1).durability(20).setNoRepair()));
 
     public static void register(IEventBus bus){
         ITEMS.register(bus);

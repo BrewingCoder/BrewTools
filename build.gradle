@@ -22,7 +22,7 @@ apply plugin: 'maven-publish'
 
 String build_number = rootProject.properties.get("build.number")
 if(build_number == null) {
-    build_number = "9999"
+    build_number = "${version_patch}"
 }
 String semver = "${mcversion}-${version_major}.${version_minor}."
 
@@ -43,9 +43,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
+            property 'forge.enabledGameTestNamespaces', 'brewtools'
             mods {
-                examplemod {
+                brewtools {
                     source sourceSets.main
                 }
             }
@@ -56,7 +56,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'brewtools'
             mods {
-                examplemod {
+                brewtools {
                     source sourceSets.main
                 }
             }
@@ -65,9 +65,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
+            property 'forge.enabledGameTestNamespaces', 'brewtools'
             mods {
-                examplemod {
+                brewtools {
                     source sourceSets.main
                 }
             }
@@ -76,9 +76,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'brewtools', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods {
-                examplemod {
+                brewtools {
                     source sourceSets.main
                 }
             }
@@ -97,19 +97,37 @@ repositories {
         }
     }
     maven { url "https://maven.theillusivec4.top/" }
+    maven { // TOP
+        name 'McJty maven'
+        url "https://maven.k-4u.nl"
+    }
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
 }
 
 
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.0.32'
-    implementation fg.deobf("curse.maven:worldstripper-250603:3670854")
-    implementation fg.deobf("curse.maven:configured-457570:3640884")
-
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-    compileOnly fg.deobf("curse.maven:jei-238222:3696757")
-    runtimeOnly fg.deobf("curse.maven:jei-238222:3696757")
+    compileOnly fg.deobf("mezz.jei:jei-${version_mcjei}:${jei_version}:api")
+    // at runtime, use the full JEI jar
+    runtimeOnly fg.deobf("mezz.jei:jei-${version_mcjei}:${jei_version}")
+    runtimeOnly fg.deobf("mcjty.theoneprobe:theoneprobe:1.18-5.1.0-8") {
+        transitive = false
+    }
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
