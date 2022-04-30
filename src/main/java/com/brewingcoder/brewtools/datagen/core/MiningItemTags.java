@@ -5,6 +5,7 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +25,7 @@ public class MiningItemTags extends ItemTagsProvider {
     }
     protected void registerOreTags(){}
 
-    protected void registerOresInGroundTags(Collection<OreBlock> ore_blocks, Collection<OreBlock> deepslate_blocks, Collection<OreBlock> netherrack_blocks){
+    protected void registerOresInGroundTags(Collection<Block> ore_blocks, Collection<Block> deepslate_blocks, Collection<Block> netherrack_blocks){
         if(ore_blocks != null && !ore_blocks.isEmpty()){
             TagsProvider.TagAppender<Item> stone = this.tag(TagUtilities.forgeTag("ores_in_ground/stone"));
             ore_blocks.forEach(b->stone.add(b.asItem()));
@@ -39,7 +40,7 @@ public class MiningItemTags extends ItemTagsProvider {
         }
     }
 
-    protected void registerOreRateTags(Collection<OreBlock> sparse_ores, Collection<OreBlock> singular_ores, Collection<OreBlock> dense_ores){
+    protected void registerOreRateTags(Collection<Block> sparse_ores, Collection<Block> singular_ores, Collection<Block> dense_ores){
         if(sparse_ores != null && !sparse_ores.isEmpty()){
             TagsProvider.TagAppender<Item> sparse = this.tag(TagUtilities.forgeTag("ore_rates/sparse"));
             sparse_ores.forEach(b-> sparse.add(b.asItem()));

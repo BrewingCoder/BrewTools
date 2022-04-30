@@ -45,16 +45,14 @@ public class BrewTools
     {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         Configs.register();
-        ModItems.register(bus);
         ModBlocks.register(bus);
+        ModItems.register(bus);
         ModSounds.register(bus);
-
         bus.addListener(this::setup);
         bus.addListener(this::enqueueIMC);
-        bus.addListener(this::processIMC);
         bus.addGenericListener(BlockEntityType.class,this::registerTileEntities);
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, OreGeneration::onBiomeLoadingEvent);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, OreGeneration::onBiomeLoadingEvent);
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -75,16 +73,13 @@ public class BrewTools
         InterModComms.sendTo(CURIOS, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().build());
     }
 
-    private void processIMC(final InterModProcessEvent event){}
 
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event){}
-
-
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents
-    {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent){}
-    }
+//
+//
+//    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+//    public static class RegistryEvents
+//    {
+//        @SubscribeEvent
+//        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent){}
+//    }
 }
