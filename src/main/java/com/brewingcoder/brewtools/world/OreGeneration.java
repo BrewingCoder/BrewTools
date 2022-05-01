@@ -66,8 +66,12 @@ public class OreGeneration {
 
     public static void onBiomeLoadingEvent(BiomeLoadingEvent event){
         if(event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND){
-            event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ABYSSAL_FEATURE);
-            event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, QUARRIED_FEATURE);
+            if(Configs.WORLD.DoAbyssal.get()) {
+                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ABYSSAL_FEATURE);
+            }
+            if(Configs.WORLD.DoQuarried.get()) {
+                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, QUARRIED_FEATURE);
+            }
         }
     }
 }

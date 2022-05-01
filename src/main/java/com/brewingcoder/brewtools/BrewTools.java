@@ -4,10 +4,13 @@ import com.brewingcoder.brewtools.Items.ModItems;
 import com.brewingcoder.brewtools.blockentities.MiningPortalEntity;
 import com.brewingcoder.brewtools.blocks.ModBlocks;
 import com.brewingcoder.brewtools.config.Configs;
+import com.brewingcoder.brewtools.datagen.ModBlockTags;
+import com.brewingcoder.brewtools.datagen.core.ModItemTags;
 import com.brewingcoder.brewtools.sound.ModSounds;
 import com.brewingcoder.brewtools.world.OreGeneration;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.Registry;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -21,6 +24,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.slf4j.Logger;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
@@ -46,6 +50,7 @@ public class BrewTools
         ModSounds.register(bus);
         bus.addListener(this::setup);
         bus.addListener(this::enqueueIMC);
+        bus.addListener(this::gatherData);
         bus.addGenericListener(BlockEntityType.class,this::registerTileEntities);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, OreGeneration::onBiomeLoadingEvent);
@@ -53,20 +58,27 @@ public class BrewTools
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        MINING_WORLD = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BrewTools.MODID,"mining_world"));
-        OVERWORLD = ResourceKey.create(Registry.DIMENSION_REGISTRY,new ResourceLocation("minecraft:overworld"));
+            MINING_WORLD = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BrewTools.MODID, "mining_world"));
+            OVERWORLD = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("minecraft:overworld"));
     }
 
     private void registerTileEntities(RegistryEvent.Register<BlockEntityType<?>> event){
-        TE_PORTAL = BlockEntityType.Builder.of(
-                MiningPortalEntity::new,
-                ModBlocks.MINING_PORTAL.get()).build(null);
-        TE_PORTAL.setRegistryName(new ResourceLocation(MODID,"tileentityportal"));
-        event.getRegistry().registerAll(TE_PORTAL);
+            TE_PORTAL = BlockEntityType.Builder.of(MiningPortalEntity::new,ModBlocks.MINING_PORTAL.get()).build(null);
+            TE_PORTAL.setRegistryName(new ResourceLocation(MODID, "tileentityportal"));
+            event.getRegistry().registerAll(TE_PORTAL);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event){
-        InterModComms.sendTo(CURIOS, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().build());
+            InterModComms.sendTo(CURIOS, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().build());
+    }
+
+   private void gatherData(final GatherDataEvent event){
+        DataGenerator generator = event.getGenerator();
+        if(event.includeServer())
+        {
+            generator.addProvider(new ModBlockTags(generator, event.getExistingFileHelper()));
+            generator.addProvider(new ModItemTags(generator, event.getExistingFileHelper()));
+        }
     }
 
 }

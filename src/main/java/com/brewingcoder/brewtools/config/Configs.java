@@ -8,7 +8,9 @@ public class Configs {
     public static final ForgeConfigSpec WORLD_SPEC;
     public static final WorldConfig WORLD;
 
+
     public static void register() {
+
         Config.registerServer(WORLD_SPEC);
     }
 
@@ -20,5 +22,6 @@ public class Configs {
         final Pair<WorldConfig,ForgeConfigSpec> worldGenPair = Config.get(WorldConfig::new);
         WORLD = worldGenPair.getLeft();
         WORLD_SPEC =worldGenPair.getRight();
+
     }
 }
